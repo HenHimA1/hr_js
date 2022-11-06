@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { Attendance } from "../../../../models";
 
 const AttendancePostRouter = Router();
 
@@ -19,8 +20,9 @@ const AttendancePostRouter = Router();
  *                 $ref: '#/components/schemas/Attendance'
  */
 
-AttendancePostRouter.post("", (req, res) => {
-  res.send("OK");
+AttendancePostRouter.post("", async (req, res) => {
+  const currentAttendance = Attendance.findById(req.params.id);
+  res.send({ success: 1, data: currentAttendance, error: null });
 });
 
 export { AttendancePostRouter };
