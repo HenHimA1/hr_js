@@ -2,11 +2,11 @@ import { Schema, model } from "mongoose";
 
 const CompanySchema = Schema({
   name: { required: true, type: String },
-  create_date: { type: Date, default: Date.now() },
+  create_date: { type: String },
   create_uid: {
     required: true,
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "user",
   },
   code: {
     required: true,

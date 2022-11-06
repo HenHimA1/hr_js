@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { UserIdRouter } from "./id";
 import { UserGetRouter } from "./get";
-import { UserPostRouter } from "./post";
 
 const UserRouter = Router();
 
@@ -34,7 +33,6 @@ UserRouter.use(
   "/user",
   UserIdRouter,
   UserGetRouter,
-  UserPostRouter
 );
 
 export { UserRouter };

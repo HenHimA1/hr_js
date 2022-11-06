@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { Company } from "../../../../models";
 
 const CompanyGetRouter = Router();
 
@@ -19,8 +20,9 @@ const CompanyGetRouter = Router();
  *                 $ref: '#/components/schemas/Company'
  */
 
-CompanyGetRouter.get("", (req, res) => {
-  res.send("OK");
+CompanyGetRouter.get("", async (req, res) => {
+  const currentCompany = await Company.find();
+  res.send({ success: 1, data: currentCompany, error: null });
 });
 
 export { CompanyGetRouter };

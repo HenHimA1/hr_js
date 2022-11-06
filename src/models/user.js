@@ -3,7 +3,6 @@ import { Schema, model } from "mongoose";
 const UserSchema = Schema({
   name: { required: [true, "Required name"], type: String },
   company_id: {
-    required: true,
     type: Schema.Types.ObjectId,
     ref: "company",
   },
@@ -23,7 +22,7 @@ const UserSchema = Schema({
     unique: true,
   },
   password: { required: true, type: String, bcrypt: true },
-  create_date: { type: Date, default: Date.now() },
+  create_date: { type: String },
 });
 
 UserSchema.virtual("employee_id", {
