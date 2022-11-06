@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { Attendance } from "../../../../models";
 
 const AttendanceGetRouter = Router();
 
@@ -19,8 +20,9 @@ const AttendanceGetRouter = Router();
  *                 $ref: '#/components/schemas/Attendance'
  */
 
-AttendanceGetRouter.get("", (req, res) => {
-  res.send("OK");
+AttendanceGetRouter.get("", async (req, res) => {
+  const currentAttendance = await Attendance.find();
+  res.send({ success: 1, data: currentAttendance, error: null });
 });
 
 export { AttendanceGetRouter };

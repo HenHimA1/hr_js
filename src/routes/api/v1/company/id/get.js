@@ -4,10 +4,17 @@ const CompanyGetIdRouter = Router();
 
 /**
  * @swagger
- * /company/:id:
+ * /company/{companyId}:
  *   get:
  *     summary: Returns the list of all the books
  *     tags: [Company]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The book id
  *     responses:
  *       200:
  *         description: The list of the books
