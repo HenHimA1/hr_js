@@ -12,7 +12,6 @@ const CompanySchema = Schema({
     required: true,
     type: String,
     unique: true,
-    default: new Date(),
   },
 });
 

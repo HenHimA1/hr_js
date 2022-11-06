@@ -62,6 +62,7 @@ const CompanyRegisterRouter = Router();
 
 CompanyRegisterRouter.post("/company", async (req, res) => {
   const currentTime = moment().format("HH:mm:ss DD-MM-YYYY");
+  const currentCode = moment.now();
   try {
     const currentUser = await User.create({
       name: "Admin " + req.body.company_name,
@@ -73,6 +74,7 @@ CompanyRegisterRouter.post("/company", async (req, res) => {
       name: req.body.company_name,
       create_uid: currentUser._id,
       create_date: currentTime,
+      code: currentCode,
     });
     await currentUser.updateOne({ company_id: currentCompany._id });
     res.send({ success: 1, data: currentCompany, error: null });

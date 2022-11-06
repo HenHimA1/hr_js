@@ -32,9 +32,9 @@ const CompanyRouter = Router();
  *       example:
  *         _id: 636769bb39fc1194c690b1b4
  *         name: My Company
- *         create_date: Alexander K. Dewdney
+ *         create_date: 15:23:12 06-11-2022
  *         create_uid: 63676a36aa5b21b5248f5c46
- *         code: 636769bb39fc1194c690b1b4
+ *         code: 1667722992083
  */
 
 CompanyRouter.use("/company", CompanyIdRouter, CompanyGetRouter);
