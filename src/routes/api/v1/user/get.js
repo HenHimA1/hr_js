@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { User } from "../../../../models";
 
 const UserGetRouter = Router();
 
@@ -6,11 +7,11 @@ const UserGetRouter = Router();
  * @swagger
  * /user:
  *   get:
- *     summary: Returns the list of all the books
+ *     summary: Returns the list of the users
  *     tags: [User]
  *     responses:
  *       200:
- *         description: The list of the books
+ *         description: The list of the users
  *         content:
  *           application/json:
  *             schema:
@@ -19,8 +20,13 @@ const UserGetRouter = Router();
  *                 $ref: '#/components/schemas/User'
  */
 
-UserGetRouter.get("", (req, res) => {
-  res.send("OK");
+UserGetRouter.get("", async (req, res) => {
+  try {
+    const currentUser = await User.find();
+    res.send({ status: "success", data: currentUser });
+  } catch (error) {
+    res.send({ status: "error", data: null, message: error.message });
+  }
 });
 
 export { UserGetRouter };

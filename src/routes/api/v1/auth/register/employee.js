@@ -39,9 +39,9 @@ const EmployeeRegisterRouter = Router();
 EmployeeRegisterRouter.post("/employee", async (req, res) => {
   try {
     const currentUser = await User.findById(req.params.id);
-    res.send({ success: 1, data: currentUser, error: null });
+    res.send({ status: "success", data: currentUser });
   } catch (error) {
-    res.send({ success: 0, data: { message: error.message }, error: 1 });
+    res.status(400).send({ status: "error", data: null, message: error.message });
   }
 });
 

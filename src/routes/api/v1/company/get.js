@@ -21,8 +21,12 @@ const CompanyGetRouter = Router();
  */
 
 CompanyGetRouter.get("", async (req, res) => {
-  const currentCompany = await Company.find();
-  res.send({ success: 1, data: currentCompany, error: null });
+  try {
+    const currentCompany = await Company.find();
+    res.send({ status: "success", data: currentCompany });
+  } catch (error) {
+    res.send({ status: "success", data: null, message: error.message });
+  }
 });
 
 export { CompanyGetRouter };

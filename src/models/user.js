@@ -21,7 +21,7 @@ const UserSchema = Schema({
     lowercase: true,
     unique: true,
   },
-  password: { required: true, type: String, bcrypt: true },
+  password: { required: true, type: String },
   create_date: { type: String },
 });
 

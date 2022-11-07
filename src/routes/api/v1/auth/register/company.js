@@ -1,6 +1,8 @@
 import { Router } from "express";
 import moment from "moment";
+import { hashSync } from "bcrypt";
 import { Company, User } from "../../../../../models";
+import { genPassword } from "../../../../../middleware";
 
 const CompanyRegisterRouter = Router();
 
@@ -67,7 +69,7 @@ CompanyRegisterRouter.post("/company", async (req, res) => {
     const currentUser = await User.create({
       name: "Admin " + req.body.company_name,
       email: req.body.email,
-      password: req.body.password,
+      password: genPassword(req.body.password),
       create_date: currentTime,
     });
     const currentCompany = await Company.create({
@@ -77,9 +79,11 @@ CompanyRegisterRouter.post("/company", async (req, res) => {
       code: currentCode,
     });
     await currentUser.updateOne({ company_id: currentCompany._id });
-    res.send({ success: 1, data: currentCompany, error: null });
+    res.send({ status: "success", data: currentCompany });
   } catch (error) {
-    res.send({ success: 0, data: { message: error.message }, error: 1 });
+    res
+      .status(400)
+      .send({ status: "error", data: null, message: error.message });
   }
 });
 

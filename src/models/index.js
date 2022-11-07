@@ -1,5 +1,3 @@
-import { User } from "./user";
-import { Company } from "./company";
-import { Attendance } from "./attendance";
-
-export { User, Company, Attendance };
+export * from "./user";
+export * from "./company";
+export * from "./attendance";

@@ -1,12 +1,12 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
 import { ApiRouter } from "./api";
 
-const AppRouter = Router()
+const AppRouter = Router();
 
 AppRouter.get("/", function (req, res) {
-    res.redirect("/docs")
-})
+  res.redirect("/docs");
+});
 
-AppRouter.use(ApiRouter)
+AppRouter.use(ApiRouter);
 
-export { AppRouter }
+export { AppRouter };
