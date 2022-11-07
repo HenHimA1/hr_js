@@ -4,6 +4,6 @@ import { CompanyPostIdRouter } from "./post";
 
 const CompanyIdRouter = Router();
 
-CompanyIdRouter.use("/:id", CompanyGetIdRouter, CompanyPostIdRouter);
+CompanyIdRouter.use("", CompanyGetIdRouter, CompanyPostIdRouter);
 
 export { CompanyIdRouter };

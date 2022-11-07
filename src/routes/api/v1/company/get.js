@@ -22,7 +22,7 @@ const CompanyGetRouter = Router();
 
 CompanyGetRouter.get("", async (req, res) => {
   try {
-    const currentCompany = await Company.find();
+    const currentCompany = await Company.find().populate("user_ids");
     res.send({ status: "success", data: currentCompany });
   } catch (error) {
     res.send({ status: "success", data: null, message: error.message });

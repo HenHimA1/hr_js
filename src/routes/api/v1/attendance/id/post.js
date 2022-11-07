@@ -6,18 +6,18 @@ const AttendancePostIdRouter = Router();
  * @swagger
  * /attendance/{attendanceId}:
  *   post:
- *     summary: Returns the list of all the books
+ *     summary: Update the Attendance by Id
  *     tags: [Attendance]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: attendanceId
  *         schema:
  *           type: string
  *         required: true
- *         description: The book id
+ *         description: The Attendance by Id
  *     responses:
  *       200:
- *         description: The list of the books
+ *         description: The attendance
  *         content:
  *           application/json:
  *             schema:

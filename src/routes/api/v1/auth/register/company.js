@@ -76,7 +76,7 @@ CompanyRegisterRouter.post("/company", async (req, res) => {
       name: req.body.company_name,
       create_uid: currentUser._id,
       create_date: currentTime,
-      code: currentCode,
+      code: currentCode.toString(16).toUpperCase(),
     });
     await currentUser.updateOne({ company_id: currentCompany._id });
     res.send({ status: "success", data: currentCompany });

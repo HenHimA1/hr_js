@@ -7,11 +7,11 @@ const AttendancePostRouter = Router();
  * @swagger
  * /attendance:
  *   post:
- *     summary: Returns the list of all the books
+ *     summary: Create the attendances
  *     tags: [Attendance]
  *     responses:
  *       200:
- *         description: The list of the books
+ *         description: The list of the attendances
  *         content:
  *           application/json:
  *             schema:

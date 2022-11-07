@@ -7,18 +7,18 @@ const AttendanceGetIdRouter = Router();
  * @swagger
  * /attendance/{attendanceId}:
  *   get:
- *     summary: Returns the list of all the books
+ *     summary: Returns the attendance by id
  *     tags: [Attendance]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: attendanceId
  *         schema:
  *           type: string
  *         required: true
- *         description: The book id
+ *         description: The attendance id
  *     responses:
  *       200:
- *         description: The list of the books
+ *         description: The attendance
  *         content:
  *           application/json:
  *             schema:

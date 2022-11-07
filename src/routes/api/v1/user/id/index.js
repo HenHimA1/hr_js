@@ -4,6 +4,6 @@ import { UserPostIdRouter } from "./post";
 
 const UserIdRouter = Router();
 
-UserIdRouter.use("/:id", UserGetIdRouter, UserPostIdRouter);
+UserIdRouter.use("", UserGetIdRouter, UserPostIdRouter);
 
 export { UserIdRouter };

@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { Company } from "../../../../../models";
 
 const CompanyGetIdRouter = Router();
 
@@ -6,18 +7,18 @@ const CompanyGetIdRouter = Router();
  * @swagger
  * /company/{companyId}:
  *   get:
- *     summary: Returns the list of all the books
+ *     summary: Returns the list of all the companies
  *     tags: [Company]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: companyId
  *         schema:
  *           type: string
  *         required: true
- *         description: The book id
+ *         description: The company id
  *     responses:
  *       200:
- *         description: The list of the books
+ *         description: The list of the companies
  *         content:
  *           application/json:
  *             schema:
@@ -26,8 +27,15 @@ const CompanyGetIdRouter = Router();
  *                 $ref: '#/components/schemas/Company'
  */
 
-CompanyGetIdRouter.get("/:id", (req, res) => {
-  res.send("OK");
+CompanyGetIdRouter.get("/:id", async (req, res) => {
+  try {
+    const currentCompanyId = await Company.findById(req.params.id);
+    res.send({ status: "success", data: currentCompanyId });
+  } catch (error) {
+    res
+      .status(400)
+      .send({ status: "error", data: null, message: error.message });
+  }
 });
 
 export { CompanyGetIdRouter };

@@ -7,18 +7,18 @@ const UserGetIdRouter = Router();
  * @swagger
  * /user/{userId}:
  *   get:
- *     summary: Returns the list of all the books
+ *     summary: Returns the list of user by id
  *     tags: [User]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: userId
  *         schema:
  *           type: string
  *         required: true
- *         description: The book id
+ *         description: The user id
  *     responses:
  *       200:
- *         description: The list of the books
+ *         description: The list of user by id
  *         content:
  *           application/json:
  *             schema:
@@ -28,8 +28,14 @@ const UserGetIdRouter = Router();
  */
 
 UserGetIdRouter.get("/:id", async (req, res) => {
-  const currentUser = await User.findById(req.params.id);
-  res.send({ success: 1, data: currentUser, error: null });
+  try {
+    const currentUserId = await User.findById(req.params.id);
+    res.send({ status: "success", data: currentUserId });
+  } catch (error) {
+    res
+      .status(400)
+      .send({ status: "error", data: null, message: error.message });
+  }
 });
 
 export { UserGetIdRouter };

@@ -7,11 +7,11 @@ const AttendanceGetRouter = Router();
  * @swagger
  * /attendance:
  *   get:
- *     summary: Returns the list of all the books
+ *     summary: Returns the list of all the attendances
  *     tags: [Attendance]
  *     responses:
  *       200:
- *         description: The list of the books
+ *         description: The list of the attendances
  *         content:
  *           application/json:
  *             schema:

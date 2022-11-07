@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { Company } from "../../../../../models";
 
 const CompanyPostIdRouter = Router();
 
@@ -6,18 +7,18 @@ const CompanyPostIdRouter = Router();
  * @swagger
  * /company/{companyId}:
  *   post:
- *     summary: Returns the list of all the books
+ *     summary: Returns the list of all the companies
  *     tags: [Company]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: companyId
  *         schema:
  *           type: string
  *         required: true
- *         description: The book id
+ *         description: The company id
  *     responses:
  *       200:
- *         description: The list of the books
+ *         description: The list of the companies
  *         content:
  *           application/json:
  *             schema:
@@ -26,8 +27,15 @@ const CompanyPostIdRouter = Router();
  *                 $ref: '#/components/schemas/Company'
  */
 
-CompanyPostIdRouter.post("/:id", (req, res) => {
-  res.send("OK");
+CompanyPostIdRouter.post("/:id", async (req, res) => {
+  try {
+    const currentCompanyId = await Company.findById(req.params.id);
+    res.send({ status: "success", data: currentCompanyId });
+  } catch (error) {
+    res
+      .status(400)
+      .send({ status: "error", data: null, message: error.message });
+  }
 });
 
 export { CompanyPostIdRouter };
