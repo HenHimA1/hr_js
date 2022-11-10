@@ -15,14 +15,20 @@ const UserGetRouter = Router();
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/User'
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: success
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/User'
  */
 
 UserGetRouter.get("", async (req, res) => {
   try {
-    const currentUser = await User.find();
+    const currentUser = await User.find().select("-password");
     res.send({ status: "success", data: currentUser });
   } catch (error) {
     res.send({ status: "error", data: null, message: error.message });

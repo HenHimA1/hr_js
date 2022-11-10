@@ -15,14 +15,21 @@ const CompanyGetRouter = Router();
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Company'
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: success
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Company'
+ *
  */
 
 CompanyGetRouter.get("", async (req, res) => {
   try {
-    const currentCompany = await Company.find().populate("user_ids");
+    const currentCompany = await Company.find();
     res.send({ status: "success", data: currentCompany });
   } catch (error) {
     res.send({ status: "success", data: null, message: error.message });

@@ -34,7 +34,7 @@ const CompanyRouter = Router();
  *         name: My Company
  *         create_date: 15:23:12 06-11-2022
  *         create_uid: 63676a36aa5b21b5248f5c46
- *         code: 1667722992083
+ *         code: 1845F4166D5
  */
 
 CompanyRouter.use("/company", CompanyIdRouter, CompanyGetRouter);

@@ -2,6 +2,7 @@ import { Schema, model } from "mongoose";
 
 const UserSchema = Schema({
   name: { required: [true, "Required name"], type: String },
+  active: { default: false, type: Boolean },
   company_id: {
     type: Schema.Types.ObjectId,
     ref: "company",
@@ -23,13 +24,6 @@ const UserSchema = Schema({
   },
   password: { required: true, type: String },
   create_date: { type: String },
-});
-
-UserSchema.virtual("employee_id", {
-  ref: "employee",
-  localField: "_id",
-  foreignField: "user_id",
-  justOne: true,
 });
 
 UserSchema.set("id", false);
