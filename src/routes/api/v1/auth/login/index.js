@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { compPassword, genToken } from "../../../../../middleware";
 import { User } from "../../../../../models";
 
 const LoginRouter = Router();
@@ -9,14 +10,18 @@ const LoginRouter = Router();
  *   schemas:
  *     UserToken:
  *       type: object
- *       required:
- *         - token
  *       properties:
- *         token:
+ *         status:
  *           type: string
- *           description: User token
- *       example:
- *         token: mycompany
+ *           example: success
+ *         data:
+ *           type: object
+ *           properties:
+ *             token:
+ *               type: string
+ *           example:
+ *             token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsiYWN0aXZlUGF0aHMiOnsicGF0aHMiOnsicGFzc3dvcmQiOiJpbml0IiwiZW1haWwiOiJpbml0IiwidXNlcl90eXBlIjoiaW5pdCIsIm5hbWUiOiJpbml0IiwiX2lkIjoiaW5pdCIsImNyZWF0ZV9kYXRlIjoiaW5pdCIsIl9fdiI6ImluaXQiLCJjb21wYW55X2lkIjoiaW5pdCJ9LCJzdGF0ZXMiOnsicmVxdWlyZSI6e30sImRlZmF1bHQiOnt9LCJpbml0Ijp7Il9pZCI6dHJ1ZSwibmFtZSI6dHJ1ZSwidXNlcl90eXBlIjp0cnVlLCJlbWFpbCI6dHJ1ZSwicGFzc3dvcmQiOnRydWUsImNyZWF0ZV9kYXRlIjp0cnVlLCJfX3YiOnRydWUsImNvbXBhbnlfaWQiOnRydWV9fX0sInNraXBJZCI6dHJ1ZX0sIiRpc05ldyI6ZmFsc2UsIl9kb2MiOnsiX2lkIjoiNjM2YzVhNzgzNTVkOGY3OTQ2MDg3ZWRhIiwibmFtZSI6IkFkbWluIE15IENvbXBhbnkiLCJ1c2VyX3R5cGUiOiJjbGllbnQiLCJlbWFpbCI6ImFkbWluQG15Y29tcGFueS5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQ2MmVEZ3pxSmpjMFdHTkI3UmcxeUouYVVSUUpsUVlXOEhNQWJXbTNIeGk1QVJ5ZmV0VlVETyIsImNyZWF0ZV9kYXRlIjoiMDg6NTc6MTIgMTAtMTEtMjAyMiIsIl9fdiI6MCwiY29tcGFueV9pZCI6IjYzNmM1YTdjMzU1ZDhmNzk0NjA4N2VkYyJ9LCJpYXQiOjE2NjgwNDU4MDQsImV4cCI6MTY2ODIxODYwNH0.kxAOFSHjzt2Kq84KiLXttH9HLb9j0W2Q_07UUFiu1IU
+ *
  */
 
 /**
@@ -71,8 +76,9 @@ const LoginRouter = Router();
 LoginRouter.post("/login", async (req, res) => {
   try {
     const currentUser = await User.findOne({ email: req.body.email });
-    if (currentUser) {
-      res.send({ status: "success", data: currentUser });
+    if (currentUser && compPassword(currentUser.password, req.body.password)) {
+      const token = genToken(currentUser);
+      res.send({ status: "success", data: { token: token } });
     } else {
       throw { message: "Email not found" };
     }

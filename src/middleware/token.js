@@ -1,11 +1,11 @@
-import { genSaltSync, hashSync } from "bcrypt";
-import { verify } from "jsonwebtoken";
+import { genSaltSync, hashSync, compareSync } from "bcrypt";
+import { verify, sign } from "jsonwebtoken";
 
 const AuthToken = (req, res, next) => {
   const authHeader = req.header("Authorization");
   const token = authHeader && authHeader.split(" ")[1];
 
-  verify(token, process.env.TOKEN_SECRET, (err, user) => {
+  verify(token, process.env.SECRET_TOKEN, (err, user) => {
     if (err) {
       res
         .status(401)
@@ -17,9 +17,19 @@ const AuthToken = (req, res, next) => {
   });
 };
 
-const genPassword = (passowrd) => {
+const genPassword = (password) => {
   const Salt = genSaltSync(10);
-  return hashSync(passowrd, Salt);
+  return hashSync(password, Salt);
 };
 
-export { AuthToken, genPassword };
+const genToken = (data) => {
+  return sign(Object.assign({}, data), process.env.SECRET_TOKEN, {
+    expiresIn: "2 days",
+  });
+};
+
+const compPassword = (password, confirmPassword) => {
+  return compareSync(confirmPassword, password);
+};
+
+export { AuthToken, genPassword, genToken, compPassword };
