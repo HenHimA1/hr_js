@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import cors from "cors";
 import { json, urlencoded } from "body-parser";
 import { serve, setup } from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
@@ -28,11 +29,12 @@ const options = swaggerJsDoc({
 
 connectDatabase()
   .then(() => {
+    app.use(cors());
     app.use("/docs", serve, setup(options));
     app.use(json());
     app.use(urlencoded({ extended: true }));
     app.use(AppRouter);
-
+    
     app.listen(port, () => {
       console.log(
         `⚡️[server]: Server is running at https://localhost:${port}`

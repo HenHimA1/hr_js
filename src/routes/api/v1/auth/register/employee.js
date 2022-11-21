@@ -1,7 +1,38 @@
 import { Router } from "express";
-import { User } from "../../../../../models";
+import { Company, User } from "../../../../../models";
 
 const EmployeeRegisterRouter = Router();
+
+/**
+@swagger
+ * components:
+ *   schemas:
+ *     EmployeeRegisterForm:
+ *       type: object
+ *       required:
+ *         - name
+ *         - company_code
+ *         - email
+ *         - password
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: Employee Name
+ *         company_code:
+ *           type: string
+ *           description: Company Code
+ *         email:
+ *           type: string
+ *           description: Employee Email
+ *         password:
+ *           type: string
+ *           description: Employee Password
+ *       example:
+ *         name: Doe
+ *         company_code: 1845F4166D5
+ *         email: doe@mycompany.com
+ *         password: doe
+ */
 
 /**
  * @swagger
@@ -15,13 +46,13 @@ const EmployeeRegisterRouter = Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: "#/components/schemas/User"
+ *             $ref: "#/components/schemas/EmployeeRegisterForm"
  *         application/xml:
  *           schema:
- *             $ref: "#/components/schemas/User"
+ *             $ref: "#/components/schemas/EmployeeRegisterForm"
  *         application/x-www-form-urlencoded:
  *           schema:
- *             $ref: "#/components/schemas/User"
+ *             $ref: "#/components/schemas/EmployeeRegisterForm"
  *         text/plain:
  *           schema:
  *             type: string
@@ -38,10 +69,24 @@ const EmployeeRegisterRouter = Router();
 
 EmployeeRegisterRouter.post("/employee", async (req, res) => {
   try {
-    const currentUser = await User.findById(req.params.id);
-    res.send({ status: "success", data: currentUser });
+    const currentCompany = await Company.findOne({
+      code: req.body.company_code,
+    });
+    if (currentCompany) {
+      const currentUser = await User.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        company_id: currentCompany._id,
+      });
+      res.send({ status: "success", data: currentUser });
+    } else {
+      throw { message: "Company code not found" };
+    }
   } catch (error) {
-    res.status(400).send({ status: "error", data: null, message: error.message });
+    res
+      .status(400)
+      .send({ status: "error", data: null, message: error.message });
   }
 });
 
