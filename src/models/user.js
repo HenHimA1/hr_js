@@ -2,7 +2,7 @@ import moment from "moment";
 import { Schema, model } from "mongoose";
 
 const UserSchema = Schema({
-  active: { default: false, type: Boolean },
+  is_active: { default: false, type: Boolean },
   name: { required: [true, "Required name"], type: String },
   company_id: {
     type: Schema.Types.ObjectId,

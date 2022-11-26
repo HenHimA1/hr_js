@@ -35,13 +35,13 @@ export const registerEmployeeAuth = {
           },
         },
       },
-      401: {
-        description: "Error: Unauthorized",
+      400: {
+        description: "Error: Bad Request",
         content: {
           "application/json": {
             schema: {
               type: "object",
-              $ref: "#/components/schemas/ErrorResponse",
+              $ref: "#/components/schemas/ErrorBadRequest",
             },
           },
         },

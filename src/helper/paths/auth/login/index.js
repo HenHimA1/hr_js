@@ -46,16 +46,5 @@ export const loginAuth = {
         },
       },
     },
-    401: {
-      description: "Error: Unauthorized",
-      content: {
-        "application/json": {
-          schema: {
-            type: "object",
-            $ref: "#/components/schemas/ErrorResponse",
-          },
-        },
-      },
-    },
   },
 };
