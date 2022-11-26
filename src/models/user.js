@@ -27,9 +27,11 @@ const UserSchema = Schema({
   create_date: { type: String },
 });
 
-UserSchema.pre("save", function (next) {
-  let currentTime = moment().format("HH:mm:ss DD-MM-YYYY");
-  this.create_date = currentTime;
+UserSchema.pre("validate", function (next) {
+  if (this.isNew) {
+    let currentTime = moment().format("HH:mm:ss DD-MM-YYYY");
+    this.create_date = currentTime;
+  }
   next();
 });
 

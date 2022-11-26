@@ -72,17 +72,14 @@ EmployeeRegisterRouter.post("/employee", async (req, res) => {
     const currentCompany = await Company.findOne({
       code: req.body.company_code,
     });
-    if (currentCompany) {
-      const currentUser = await User.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        company_id: currentCompany._id,
-      });
-      res.send({ status: "success", data: currentUser });
-    } else {
-      throw { message: "Company code not found" };
-    }
+    if (!currentCompany) throw { message: "Company code not found" };
+    const currentUser = await User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      company_id: currentCompany._id,
+    });
+    res.send({ status: "success", data: currentUser });
   } catch (error) {
     res
       .status(400)

@@ -1,15 +1,23 @@
 import { companySchema } from "./company";
-import { errorSchema } from "./error";
 import { userSchema } from "./user";
+import { errorResponseSchema, errorBadRequestSchema } from "./error";
 import { notificationSchema, createNotificationSchema } from "./notification";
-import { loginAuthSchema, tokenAuthSchema } from "./auth";
+import {
+  loginAuthSchema,
+  registerCompanyAuthSchema,
+  registerEmployeeAuthSchema,
+  tokenAuthSchema,
+} from "./auth";
 
 export const schemas = Object.assign(
   {},
   loginAuthSchema,
+  registerCompanyAuthSchema,
+  registerEmployeeAuthSchema,
   tokenAuthSchema,
   companySchema,
-  errorSchema,
+  errorBadRequestSchema,
+  errorResponseSchema,
   userSchema,
   notificationSchema,
   createNotificationSchema

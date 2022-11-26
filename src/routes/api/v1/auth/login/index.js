@@ -76,16 +76,17 @@ const LoginRouter = Router();
 LoginRouter.post("/login", async (req, res) => {
   try {
     const currentUser = await User.findOne({ email: req.body.email });
-    if (!currentUser) {
-      throw { message: "Email not found" };
-    }
+    if (!currentUser) throw { message: "Email not found" };
     if (!compPassword(currentUser.password, req.body.password)) {
       throw { message: "Password wrong" };
     }
+    if (!currentUser.is_active) throw { message: "Waiting for confirmation" };
     const token = genToken(currentUser);
     res.send({ status: "success", data: { token: token } });
   } catch (error) {
-    res.send({ status: "error", data: null, message: error.message });
+    res
+      .status(400)
+      .send({ status: "error", data: null, message: error.message });
   }
 });
 

@@ -6,13 +6,13 @@ export const postNotification = {
         required: true,
         content: {
           "application/json": {
-            schema: { $ref: "#/components/schemas/createNotificationModel" },
+            schema: { $ref: "#/components/schemas/CreateNotificationModel" },
           },
           "application/xml": {
-            schema: { $ref: "#/components/schemas/createNotificationModel" },
+            schema: { $ref: "#/components/schemas/CreateNotificationModel" },
           },
           "application/x-www-form-urlencoded": {
-            schema: { $ref: "#/components/schemas/createNotificationModel" },
+            schema: { $ref: "#/components/schemas/CreateNotificationModel" },
           },
         },
       },

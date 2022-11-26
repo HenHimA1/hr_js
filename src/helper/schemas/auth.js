@@ -20,6 +20,68 @@ export const loginAuthSchema = {
   },
 };
 
+export const registerCompanyAuthSchema = {
+  RegisterCompanyAuthModel: {
+    type: "object",
+    properties: {
+      name: {
+        type: "string",
+        description: "The Name Company",
+        required: true,
+      },
+      email: {
+        type: "string",
+        description: "The Email Company",
+        required: true,
+      },
+      password: {
+        type: "string",
+        description: "The Password Company",
+        required: true,
+      },
+    },
+    example: {
+      name: "mycompany",
+      email: "admin@mycompany.com",
+      password: "mycompany",
+    },
+  },
+};
+
+export const registerEmployeeAuthSchema = {
+  RegisterEmployeeAuthModel: {
+    type: "object",
+    properties: {
+      company_code: {
+        type: "string",
+        description: "The Name Company",
+        required: true,
+      },
+      name: {
+        type: "string",
+        description: "The Name Company",
+        required: true,
+      },
+      email: {
+        type: "string",
+        description: "The Email Company",
+        required: true,
+      },
+      password: {
+        type: "string",
+        description: "The Password Company",
+        required: true,
+      },
+    },
+    example: {
+      company_code: "184B450ADEC",
+      name: "staff",
+      email: "staff@mycompany.com",
+      password: "staff",
+    },
+  },
+};
+
 export const tokenAuthSchema = {
   TokenAuthModel: {
     type: "object",

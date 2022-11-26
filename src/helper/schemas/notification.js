@@ -1,5 +1,5 @@
 export const createNotificationSchema = {
-    createNotificationModel: {
+    CreateNotificationModel: {
       type: "object",
       properties: {
         title: {

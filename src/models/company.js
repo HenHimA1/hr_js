@@ -23,11 +23,13 @@ CompanySchema.virtual("user_ids", {
   foreignField: "company_id",
 });
 
-CompanySchema.pre("save", function (next) {
-  let currentTime = moment().format("HH:mm:ss DD-MM-YYYY");
-  let currentCode = moment.now().toString(16).toUpperCase();
-  this.create_date = currentTime;
-  this.code = currentCode;
+CompanySchema.pre("validate", function (next) {
+  if (this.isNew) {
+    let currentTime = moment().format("HH:mm:ss DD-MM-YYYY");
+    let currentCode = moment.now().toString(16).toUpperCase();
+    this.create_date = currentTime;
+    this.code = currentCode;
+  }
   next();
 });
 

@@ -1,7 +1,7 @@
 import { Router } from "express";
-// import { NotificationIdRouter } from "./id";
 import { NotificationGetRouter } from "./get";
 import { NotificationPostRouter } from "./post";
+import { NotificationIdRouter } from "./id";
 
 const NotificationRouter = Router();
 
@@ -46,7 +46,8 @@ const NotificationRouter = Router();
 NotificationRouter.use(
   "/notification",
   NotificationGetRouter,
-  NotificationPostRouter
+  NotificationPostRouter,
+  NotificationIdRouter
 );
 
 export { NotificationRouter };

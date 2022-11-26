@@ -35,6 +35,17 @@ export const registerCompanyAuth = {
           },
         },
       },
+      400: {
+        description: "Error: Bad Request",
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              $ref: "#/components/schemas/ErrorBadRequest",
+            },
+          },
+        },
+      },
       401: {
         description: "Error: Unauthorized",
         content: {

@@ -9,9 +9,11 @@ const AttendanceSchema = Schema({
   is_valid: { default: false, type: Boolean },
 });
 
-AttendanceSchema.pre("save", function (next) {
-  let currentTime = moment().format("HH:mm:ss DD-MM-YYYY");
-  this.create_date = currentTime;
+AttendanceSchema.pre("validate", function (next) {
+  if (this.isNew) {
+    let currentTime = moment().format("HH:mm:ss DD-MM-YYYY");
+    this.create_date = currentTime;    
+  }
   next();
 });
 
