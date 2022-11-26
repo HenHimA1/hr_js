@@ -1,8 +1,9 @@
+import moment from "moment";
 import { Schema, model } from "mongoose";
 
 const UserSchema = Schema({
-  name: { required: [true, "Required name"], type: String },
   active: { default: false, type: Boolean },
+  name: { required: [true, "Required name"], type: String },
   company_id: {
     type: Schema.Types.ObjectId,
     ref: "company",
@@ -24,6 +25,12 @@ const UserSchema = Schema({
   },
   password: { required: true, type: String },
   create_date: { type: String },
+});
+
+UserSchema.pre("save", function (next) {
+  let currentTime = moment().format("HH:mm:ss DD-MM-YYYY");
+  this.create_date = currentTime;
+  next();
 });
 
 UserSchema.set("id", false);
