@@ -1,6 +1,6 @@
 export const postNotification = {
   tags: ["Notification"],
-  description: "List of all notification",
+  description: "Create notification",
   requestBody: {
     description: "Optional description in Markdown",
     required: true,

@@ -28,7 +28,13 @@ export const registerCompanyAuth = {
                 example: "success",
               },
               data: {
-                $ref: "#/components/schemas/TokenAuthModel",
+                type: "object",
+                properties: {
+                  message: {
+                    type: "string",
+                    example: "Waiting for confirmation",
+                  },
+                },
               },
             },
           },
