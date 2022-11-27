@@ -2,8 +2,8 @@ import moment from "moment";
 import { Schema, model } from "mongoose";
 
 const AttendanceSchema = Schema({
-  check_in: { required: true, type: Date, default: Date.now() },
-  check_out: { type: Date },
+  check_in: { required: true, type: String },
+  check_out: { type: String },
   user_id: { required: true, type: Schema.Types.ObjectId, ref: "user" },
   create_date: { type: String },
   is_valid: { default: false, type: Boolean },
@@ -12,7 +12,7 @@ const AttendanceSchema = Schema({
 AttendanceSchema.pre("validate", function (next) {
   if (this.isNew) {
     let currentTime = moment().format("HH:mm:ss DD-MM-YYYY");
-    this.create_date = currentTime;    
+    this.create_date = currentTime;
   }
   next();
 });

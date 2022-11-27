@@ -4,6 +4,7 @@ services:
     build: .
     depends_on:
       - mongo
+    restart: always
     ports:
       - 3000:3000
     volumes:
@@ -27,7 +28,6 @@ services:
     depends_on: 
       - mongo
     image: mongo-express
-    container_name: mexpress
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=root
       - ME_CONFIG_MONGODB_ADMINPASSWORD=hr755
