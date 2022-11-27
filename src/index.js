@@ -12,7 +12,7 @@ const port = process.env.PORT;
 
 connectDatabase()
   .then(() => {
-    // app.use(cors());
+    app.use(cors());
     app.use("/docs", serve, setup(swaggerDocs));
     app.use(json());
     app.use(urlencoded({ extended: true }));
