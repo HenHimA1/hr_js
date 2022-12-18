@@ -35,17 +35,6 @@ const UserSchema = Schema({
   create_date: { type: String },
 });
 
-UserSchema.pre("save", function (next) {
-  this.password = genPassword(this.password);
-  next();
-});
-
-UserSchema.pre("findOneAndUpdate", function (next) {
-  // console.log(this.password);
-  console.log(this.getUpdate());
-  next();
-});
-
 UserSchema.pre("validate", function (next) {
   if (this.isNew) {
     let currentTime = moment().format("HH:mm:ss DD-MM-YYYY");

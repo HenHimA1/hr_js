@@ -29,5 +29,5 @@ export const genToken = (data) => {
 };
 
 export const compPassword = (password, confirmPassword) => {
-  return compareSync(confirmPassword, password);
+  return compareSync(password, confirmPassword);
 };

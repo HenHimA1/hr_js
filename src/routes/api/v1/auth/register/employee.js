@@ -76,10 +76,13 @@ EmployeeRegisterRouter.post("/employee", async (req, res) => {
     const currentUser = await User.create({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
+      password: genPassword(req.body.password),
       company_id: currentCompany._id,
     });
-    res.send({ status: "success", data: currentUser });
+    res.send({
+      status: "success",
+      data: { message: "Waiting for confirmation" },
+    });
   } catch (error) {
     res
       .status(400)
