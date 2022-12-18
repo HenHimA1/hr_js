@@ -77,7 +77,7 @@ LoginRouter.post("/login", async (req, res) => {
   try {
     const currentUser = await User.findOne({ email: req.body.email });
     if (!currentUser) throw { message: "Email not found" };
-    if (!compPassword(currentUser.password, req.body.password)) {
+    if (!compPassword(req.body.password, currentUser.password)) {
       throw { message: "Password wrong" };
     }
     if (!currentUser.is_active) throw { message: "Waiting for confirmation" };

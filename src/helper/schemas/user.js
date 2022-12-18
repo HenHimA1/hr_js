@@ -1,3 +1,31 @@
+export const updateUserSchema = {
+  UpdateUserModel: {
+    type: "object",
+    properties: {
+      name: {
+        type: "string",
+        description: "The Name Company",
+        required: true,
+      },
+      email: {
+        type: "string",
+        description: "The Email Company",
+        required: true,
+      },
+      password: {
+        type: "string",
+        description: "The Password Company",
+        required: true,
+      },
+    },
+    example: {
+      name: "staff",
+      email: "staff@mycompany.com",
+      password: "staff",
+    },
+  },
+};
+
 export const userSchema = {
     UserModel: {
       type: "object",

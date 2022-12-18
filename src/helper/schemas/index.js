@@ -1,5 +1,5 @@
 import { companySchema } from "./company";
-import { userSchema } from "./user";
+import { userSchema, updateUserSchema } from "./user";
 import { errorResponseSchema, errorBadRequestSchema } from "./error";
 import { attendanceSchema, createAttendanceSchema } from "./attendance";
 import { notificationSchema, createNotificationSchema } from "./notification";
@@ -20,6 +20,7 @@ export const schemas = Object.assign(
   errorBadRequestSchema,
   errorResponseSchema,
   userSchema,
+  updateUserSchema,
   attendanceSchema,
   createAttendanceSchema,
   notificationSchema,

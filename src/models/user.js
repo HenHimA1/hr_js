@@ -1,8 +1,16 @@
 import moment from "moment";
 import { Schema, model } from "mongoose";
+import { UserData } from "../data";
+import { genPassword } from "../middleware";
 
 const UserSchema = Schema({
   is_active: { default: false, type: Boolean },
+  access_ids: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "access",
+    },
+  ],
   name: { required: [true, "Required name"], type: String },
   company_id: {
     type: Schema.Types.ObjectId,
@@ -27,6 +35,17 @@ const UserSchema = Schema({
   create_date: { type: String },
 });
 
+UserSchema.pre("save", function (next) {
+  this.password = genPassword(this.password);
+  next();
+});
+
+UserSchema.pre("findOneAndUpdate", function (next) {
+  // console.log(this.password);
+  console.log(this.getUpdate());
+  next();
+});
+
 UserSchema.pre("validate", function (next) {
   if (this.isNew) {
     let currentTime = moment().format("HH:mm:ss DD-MM-YYYY");
@@ -40,5 +59,15 @@ UserSchema.set("toJSON", { virtuals: true, versionKey: false });
 UserSchema.set("toObject", { virtuals: true, versionKey: false });
 
 const User = model("user", UserSchema);
+
+UserData.map((record) =>
+  User.collection.findOneAndUpdate(
+    { _id: record._id },
+    {
+      $setOnInsert: record,
+    },
+    { upsert: true }
+  )
+);
 
 export { User, UserSchema };

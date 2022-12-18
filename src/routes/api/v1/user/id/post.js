@@ -1,11 +1,16 @@
 import { Router } from "express";
+import { AuthToken } from "../../../../../middleware";
 import { User } from "../../../../../models";
 
 const UserPostIdRouter = Router();
 
-UserPostIdRouter.post("/:id", async (req, res) => {
+UserPostIdRouter.post("/:id", AuthToken, async (req, res) => {
   try {
-    const currentUserId = await User.findById(req.params.id);
+    const currentUserId = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { returnDocument: "after", runValidators: true }
+    );
     res.send({ status: "success", data: currentUserId });
   } catch (error) {
     res
