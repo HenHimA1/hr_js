@@ -22,9 +22,15 @@ CompanyRegisterRouter.post("/company", async (req, res) => {
       data: { message: "Waiting for confirmation" },
     });
   } catch (error) {
-    res
-      .status(400)
-      .send({ status: "error", data: null, message: error.message });
+    if (error.code == 11000 && error.keyValue.email) {
+      res
+        .status(400)
+        .send({ status: "error", data: null, message: "Email has already been taken" });
+    } else {
+      res
+        .status(400)
+        .send({ status: "error", data: null, message: error.message });
+    }
   }
 });
 

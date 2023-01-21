@@ -7,6 +7,8 @@ const AttendanceSchema = Schema({
   user_id: { required: true, type: Schema.Types.ObjectId, ref: "user" },
   create_date: { type: String },
   is_valid: { default: false, type: Boolean },
+  latitude: { type: Number },
+  longitude: { type: Number },
 });
 
 AttendanceSchema.pre("validate", function (next) {
