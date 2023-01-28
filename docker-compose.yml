@@ -2,40 +2,11 @@ version: "3.1"
 services:
   express:
     build: .
-    depends_on:
-      - mongo
     restart: always
     ports:
       - 3000:3000
     volumes:
-      - ./src:/usr/app/src
-      - ./.env:/usr/app/.env
+      - ./dist:/usr/app/dist
+      - .env:/usr/app/.env
+    working_dir: /usr/app
     command: npm run start
-
-  mongo:
-    image: mongo
-    restart: always
-    volumes:
-      - ./database:/data/db
-      - ./mongod.conf:/etc/mongod.conf
-    ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: hr755
-
-  mongo-express:
-    depends_on: 
-      - mongo
-    image: mongo-express
-    environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=hr755
-      - ME_CONFIG_MONGODB_URL=mongodb://root:hr755@mongo:27017/?authSource=admin
-      - ME_CONFIG_BASICAUTH_USERNAME=admin
-      - ME_CONFIG_BASICAUTH_PASSWORD=admin
-    links:
-      - mongo
-    restart: unless-stopped
-    ports:
-      - "8081:8081"
