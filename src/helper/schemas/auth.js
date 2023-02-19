@@ -98,3 +98,19 @@ export const tokenAuthSchema = {
     },
   },
 };
+
+export const confirmationAuthSchema = {
+  confirmationAuthModel: {
+    type: "object",
+    properties: {
+      email: {
+        type: "string",
+        description: "The Email User",
+        required: true,
+      },
+    },
+    example: {
+      email: "admin@mycompany.com",
+    },
+  },
+};

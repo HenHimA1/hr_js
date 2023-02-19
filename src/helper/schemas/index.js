@@ -8,6 +8,7 @@ import {
   registerCompanyAuthSchema,
   registerEmployeeAuthSchema,
   tokenAuthSchema,
+  confirmationAuthSchema,
 } from "./auth";
 
 export const schemas = Object.assign(
@@ -24,5 +25,6 @@ export const schemas = Object.assign(
   attendanceSchema,
   createAttendanceSchema,
   notificationSchema,
-  createNotificationSchema
+  createNotificationSchema,
+  confirmationAuthSchema,
 );
