@@ -4,7 +4,7 @@ services:
     build: .
     restart: always
     ports:
-      - 3000:3000
+      - 80:3000
     tty: true
     working_dir: /usr/app
     command: npm run start
