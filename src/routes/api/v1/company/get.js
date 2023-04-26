@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Company } from "../../../../models";
+import { Company } from "models";
 
 const CompanyGetRouter = Router();
 

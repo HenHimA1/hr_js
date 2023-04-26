@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Attendance } from "../../../../models";
+import { Attendance } from "models";
 
 const AttendancePostRouter = Router();
 

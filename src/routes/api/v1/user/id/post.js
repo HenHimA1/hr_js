@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { AuthToken } from "../../../../../middleware";
-import { User } from "../../../../../models";
+import { AuthToken } from "middleware";
+import { User } from "models";
 
 const UserPostIdRouter = Router();
 

@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { compPassword, genPassword, genToken } from "../../../../../middleware";
-import { User } from "../../../../../models";
+import { compPassword, genToken } from "middleware";
+import { User } from "models";
 
 const LoginRouter = Router();
 

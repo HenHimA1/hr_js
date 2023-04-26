@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Notification } from "../../../../models";
+import { Notification } from "models";
 
 const NotificationPostRouter = Router();
 

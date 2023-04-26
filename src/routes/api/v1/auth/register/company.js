@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { genPassword } from "../../../../../middleware";
-import { Company, User } from "../../../../../models";
+import { genPassword } from "middleware";
+import { Company, User } from "models";
 
 const CompanyRegisterRouter = Router();
 
