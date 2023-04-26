@@ -4,7 +4,6 @@ WORKDIR /usr/app
 
 COPY package.json /usr/app/package.json
 COPY src /usr/app/src
-COPY .env /usr/app/.env
 COPY .babelrc /usr/app/.babelrc
 
 RUN npm install -g npm@9.6.4
