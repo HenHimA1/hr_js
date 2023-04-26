@@ -1,6 +1,5 @@
 import moment from "moment";
 import { Schema, model } from "mongoose";
-import { genPassword } from "../middleware";
 
 const UserSchema = Schema({
   is_active: { default: false, type: Boolean },
