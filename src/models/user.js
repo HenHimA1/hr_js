@@ -1,6 +1,5 @@
 import moment from "moment";
 import { Schema, model } from "mongoose";
-import { UserData } from "../data";
 import { genPassword } from "../middleware";
 
 const UserSchema = Schema({
@@ -48,15 +47,5 @@ UserSchema.set("toJSON", { virtuals: true, versionKey: false });
 UserSchema.set("toObject", { virtuals: true, versionKey: false });
 
 const User = model("user", UserSchema);
-
-UserData.map((record) =>
-  User.collection.findOneAndUpdate(
-    { _id: record._id },
-    {
-      $setOnInsert: record,
-    },
-    { upsert: true }
-  )
-);
 
 export { User, UserSchema };
