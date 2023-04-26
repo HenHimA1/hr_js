@@ -15,6 +15,8 @@ const CompanySchema = Schema({
     type: String,
     unique: true,
   },
+  latitude: { type: Number },
+  longitude: { type: Number },
 });
 
 CompanySchema.virtual("user_ids", {

@@ -73,7 +73,7 @@ EmployeeRegisterRouter.post("/employee", async (req, res) => {
       code: req.body.company_code,
     });
     if (!currentCompany) throw { message: "Company code not found" };
-    const currentUser = await User.create({
+    await User.create({
       name: req.body.name,
       email: req.body.email,
       password: genPassword(req.body.password),
