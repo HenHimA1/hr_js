@@ -3,12 +3,6 @@ import { Schema, model } from "mongoose";
 
 const UserSchema = Schema({
   is_active: { default: false, type: Boolean },
-  access_ids: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "access",
-    },
-  ],
   name: { required: [true, "Required name"], type: String },
   company_id: {
     type: Schema.Types.ObjectId,
