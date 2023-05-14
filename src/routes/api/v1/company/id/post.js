@@ -29,7 +29,11 @@ const CompanyPostIdRouter = Router();
 
 CompanyPostIdRouter.post("/:id", async (req, res) => {
   try {
-    const currentCompanyId = await Company.findById(req.params.id);
+    const currentCompanyId = await Company.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { returnDocument: "after", runValidators: true }
+    );
     res.send({ status: "success", data: currentCompanyId });
   } catch (error) {
     res
