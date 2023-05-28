@@ -6,5 +6,12 @@ const AppRouter = Router();
 
 AppRouter.use("/", express.static(join(__dirname, '../../public')))
 AppRouter.use(ApiRouter);
+AppRouter.use((req, res, next) => {
+    res.status(400)
+
+    if (req.accepts('html')) {
+        res.redirect("/")
+    }
+})
 
 export { AppRouter };
