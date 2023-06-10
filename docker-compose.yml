@@ -1,16 +1,16 @@
-version: "3.1"
+version: "3.5"
 services:
   express:
     build: .
     restart: always
     ports:
       - 80:3000
-    working_dir: /usr/app
     volumes:
       - ./.env:/usr/app/.env
-    command: npm run start
+    command: npm run start --prefix /usr/app
     networks:
-      - my_presensi
+      - my-presensi
 
 networks:
-  my_presensi:
+  my-presensi:
+    name: my_presensi
