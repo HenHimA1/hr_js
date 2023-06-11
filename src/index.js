@@ -8,7 +8,7 @@ import { connectDatabase } from "./configs";
 import { AppRouter } from "./routes";
 
 const app = express();
-const port = process.env.PORT;
+const BASE_URL = process.env.BASE_URL;
 
 connectDatabase()
   .then(() => {
@@ -20,7 +20,7 @@ connectDatabase()
 
     app.listen(port, () => {
       console.log(
-        `⚡️[server]: Server is running at https://localhost:${port}`
+        `⚡️[server]: Server is running at ${BASE_URL}`
       );
     });
   })
