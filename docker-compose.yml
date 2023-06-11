@@ -2,12 +2,22 @@ version: "3.5"
 services:
   express:
     build: .
-    restart: always
+    restart: unless-stopped
     ports:
-      - 80:3000
+      - 3000:3000
     volumes:
       - .env:/usr/app/.env
     command: npm run start --prefix /usr/app
+    networks:
+      - my-presensi
+  
+  nginx:
+    build: 
+      context: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - express
     networks:
       - my-presensi
 

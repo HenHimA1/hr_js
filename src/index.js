@@ -9,6 +9,7 @@ import { AppRouter } from "./routes";
 
 const app = express();
 const BASE_URL = process.env.BASE_URL;
+const PORT = BASE_URL && BASE_URL.split(":");
 
 connectDatabase()
   .then(() => {
@@ -18,10 +19,8 @@ connectDatabase()
     app.use(urlencoded({ extended: true }));
     app.use(AppRouter);
 
-    app.listen(port, () => {
-      console.log(
-        `⚡️[server]: Server is running at ${BASE_URL}`
-      );
+    app.listen(PORT && PORT[2] || 80, () => {
+      console.log(`⚡️[server]: Server is running at ${BASE_URL}`);
     });
   })
   .catch((error) => console.log(error));
